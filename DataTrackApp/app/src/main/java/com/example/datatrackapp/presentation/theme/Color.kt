@@ -1,4 +1,4 @@
-package com.example.datatrackapp.ui.theme
+package com.example.datatrackapp.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 

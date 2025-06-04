@@ -1,4 +1,4 @@
-package com.example.datatrackapp.ui.theme
+package com.example.datatrackapp.presentation.theme
 
 import android.app.Activity
 import android.os.Build

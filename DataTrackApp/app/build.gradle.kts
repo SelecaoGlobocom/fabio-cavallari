@@ -68,7 +68,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     //network
     implementation(libs.retrofit)
-    implementation(libs.converter.jackson)
+    implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
     //koin
     implementation(libs.koin.androidx.compose)

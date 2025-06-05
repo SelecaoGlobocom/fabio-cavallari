@@ -1,6 +1,5 @@
 package com.example.datatrackapp.di
 
-import android.system.Os.bind
 import com.example.datatrackapp.data.client.TrackApiClient
 import com.example.datatrackapp.data.remoteprovider.TrackApiRemoteProvider
 import com.example.datatrackapp.data.remoteprovider.TrackApiRemoteProviderImpl
@@ -15,7 +14,7 @@ import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 import retrofit2.Retrofit
-import retrofit2.converter.jackson.JacksonConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object DataTrackDependencyInjection {
@@ -31,7 +30,7 @@ object DataTrackDependencyInjection {
         }
         factory<TrackApiClient> {
             Retrofit.Builder()
-                .addConverterFactory(JacksonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl("http://10.0.2.2:8080/")
                 .client(get())
                 .build()

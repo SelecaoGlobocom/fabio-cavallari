@@ -69,6 +69,7 @@ dependencies {
     //network
     implementation(libs.retrofit)
     implementation(libs.converter.jackson)
+    implementation(libs.logging.interceptor)
     //koin
     implementation(libs.koin.androidx.compose)
 }

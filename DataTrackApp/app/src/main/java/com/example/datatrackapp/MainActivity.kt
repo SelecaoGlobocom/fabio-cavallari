@@ -8,14 +8,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.example.datatrackapp.presentation.navigation.DataTrackNavHost
-import com.example.datatrackapp.presentation.screen.HomeScreen
 import com.example.datatrackapp.presentation.theme.DataTrackAppTheme
+import org.koin.androidx.compose.KoinAndroidContext
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,9 +21,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navHostController = rememberNavController()
             DataTrackAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Box(Modifier.padding(innerPadding)) {
-                        DataTrackNavHost(navHostController)
+                KoinAndroidContext {
+                    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                        Box(Modifier.padding(innerPadding)) {
+                            DataTrackNavHost(navHostController)
+                        }
                     }
                 }
             }

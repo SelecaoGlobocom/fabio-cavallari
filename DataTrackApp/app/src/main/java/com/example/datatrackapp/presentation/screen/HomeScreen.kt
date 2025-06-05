@@ -1,7 +1,6 @@
 package com.example.datatrackapp.presentation.screen
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
@@ -11,33 +10,54 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
+import com.example.datatrackapp.presentation.component.ScreenOnResume
 import com.example.datatrackapp.presentation.navigation.ScreenRoute
 import com.example.datatrackapp.presentation.theme.DataTrackAppTheme
+import com.example.datatrackapp.presentation.viewmodel.HomeScreenViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier, navController: NavController) {
-    Column (
-        modifier.fillMaxSize(),
+fun HomeScreen(navController: NavController) {
+    val viewModel: HomeScreenViewModel = koinViewModel()
+    HomeScreen(
+        trackScreenView = {
+            viewModel.trackButtonClick("home screen view")
+        },
+        onButtonClick = { screenRoute ->
+            viewModel.trackButtonClick("button click ${screenRoute.title}")
+            navController.navigate(screenRoute)
+        }
+    )
+}
+
+@Composable
+fun HomeScreen(
+    trackScreenView: () -> Unit = {},
+    onButtonClick: (ScreenRoute) -> Unit = {},
+) {
+    ScreenOnResume { trackScreenView() }
+    Column(
+        Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Button(
             onClick = {
-                navController.navigate(ScreenRoute.SportsChanelScreenRoute)
+                onButtonClick(ScreenRoute.SportsChanelScreenRoute)
             }
         ) {
             Text("Sports Chanel")
         }
         Button(
             onClick = {
-                navController.navigate(ScreenRoute.FilmChanelScreenRoute)
+                onButtonClick(ScreenRoute.FilmChanelScreenRoute)
             }
         ) {
             Text("Film Chanel")
         }
         Button(
             onClick = {
-                navController.navigate(ScreenRoute.MusicChanelScreenRoute)
+                onButtonClick(ScreenRoute.MusicChanelScreenRoute)
             }
         ) {
             Text("Music Chanel")
@@ -49,6 +69,6 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavController) {
 @Composable
 private fun HomeScreenPrev() {
     DataTrackAppTheme {
-//        HomeScreen()
+        HomeScreen() {}
     }
 }

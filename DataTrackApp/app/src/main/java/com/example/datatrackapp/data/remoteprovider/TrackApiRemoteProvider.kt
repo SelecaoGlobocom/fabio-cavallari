@@ -1,5 +1,7 @@
 package com.example.datatrackapp.data.remoteprovider
 
+import com.example.datatrackapp.domain.model.Hit
+
 interface TrackApiRemoteProvider {
-    suspend fun trackHit(eventName: String) : Boolean
+    suspend fun trackHit(hit: Hit) : Boolean
 }

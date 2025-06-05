@@ -20,11 +20,11 @@ import org.koin.androidx.compose.koinViewModel
 fun HomeScreen(navController: NavController) {
     val viewModel: HomeScreenViewModel = koinViewModel()
     HomeScreen(
-        trackScreenView = {
-            viewModel.trackButtonClick("home screen view")
+        trackPageView = {
+            viewModel.trackPageView()
         },
         onButtonClick = { screenRoute ->
-            viewModel.trackButtonClick("button click ${screenRoute.title}")
+            viewModel.trackButtonClick(screenRoute.title)
             navController.navigate(screenRoute)
         }
     )
@@ -32,10 +32,10 @@ fun HomeScreen(navController: NavController) {
 
 @Composable
 fun HomeScreen(
-    trackScreenView: () -> Unit = {},
+    trackPageView: () -> Unit = {},
     onButtonClick: (ScreenRoute) -> Unit = {},
 ) {
-    ScreenOnResume { trackScreenView() }
+    ScreenOnResume { trackPageView() }
     Column(
         Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,

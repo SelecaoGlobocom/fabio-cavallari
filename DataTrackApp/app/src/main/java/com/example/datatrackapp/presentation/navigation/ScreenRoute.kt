@@ -9,9 +9,9 @@ sealed class ScreenRoute(
     @Serializable
     data object HomeScreenRoute : ScreenRoute("Home")
     @Serializable
-    data object SportsChanelScreenRoute : ScreenRoute("Sports")
+    data object SportsChannelScreenRoute : ScreenRoute("Sports")
     @Serializable
-    data object FilmChanelScreenRoute : ScreenRoute("Film")
+    data object FilmChannelScreenRoute : ScreenRoute("Film")
     @Serializable
-    data object MusicChanelScreenRoute : ScreenRoute("Music")
+    data object MusicChannelScreenRoute : ScreenRoute("Music")
 }

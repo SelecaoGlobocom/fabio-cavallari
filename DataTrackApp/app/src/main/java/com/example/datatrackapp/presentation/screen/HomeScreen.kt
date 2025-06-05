@@ -43,24 +43,24 @@ fun HomeScreen(
     ) {
         Button(
             onClick = {
-                onButtonClick(ScreenRoute.SportsChanelScreenRoute)
+                onButtonClick(ScreenRoute.SportsChannelScreenRoute)
             }
         ) {
-            Text("Sports Chanel")
+            Text("Sports Channel")
         }
         Button(
             onClick = {
-                onButtonClick(ScreenRoute.FilmChanelScreenRoute)
+                onButtonClick(ScreenRoute.FilmChannelScreenRoute)
             }
         ) {
-            Text("Film Chanel")
+            Text("Film Channel")
         }
         Button(
             onClick = {
-                onButtonClick(ScreenRoute.MusicChanelScreenRoute)
+                onButtonClick(ScreenRoute.MusicChannelScreenRoute)
             }
         ) {
-            Text("Music Chanel")
+            Text("Music Channel")
         }
     }
 }

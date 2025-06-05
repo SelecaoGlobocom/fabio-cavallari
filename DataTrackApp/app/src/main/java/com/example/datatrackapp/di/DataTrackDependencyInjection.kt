@@ -6,6 +6,7 @@ import com.example.datatrackapp.data.remoteprovider.TrackApiRemoteProviderImpl
 import com.example.datatrackapp.data.repository.DataTrackRepository
 import com.example.datatrackapp.data.repository.DataTrackRepositoryImpl
 import com.example.datatrackapp.domain.usecase.SendHitUseCase
+import com.example.datatrackapp.presentation.viewmodel.ChannelScreenViewModel
 import com.example.datatrackapp.presentation.viewmodel.HomeScreenViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -43,5 +44,6 @@ object DataTrackDependencyInjection {
         factoryOf(::DataTrackRepositoryImpl) { bind<DataTrackRepository>() }
         factoryOf(::SendHitUseCase) { bind<SendHitUseCase>() }
         viewModelOf(::HomeScreenViewModel)
+        viewModelOf(::ChannelScreenViewModel)
     }
 }

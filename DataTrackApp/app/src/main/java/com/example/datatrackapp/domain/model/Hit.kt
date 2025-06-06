@@ -7,7 +7,7 @@ data class Hit(
     val timestamp: Long = System.currentTimeMillis(),
 )
 
-enum class HitType{
+enum class HitType {
     PAGE_VIEW,
     EVENT,
 }

@@ -1,13 +1,36 @@
 package com.example.datatrackapp.data.repository
 
+import com.example.datatrackapp.data.dao.HitDao
+import com.example.datatrackapp.data.dbo.asDboModel
+import com.example.datatrackapp.data.dto.asDtoModel
 import com.example.datatrackapp.data.remoteprovider.TrackApiRemoteProvider
 import com.example.datatrackapp.domain.model.Hit
+import com.example.datatrackapp.utils.Logger
 
 class DataTrackRepositoryImpl(
-    private val remoteProvider: TrackApiRemoteProvider
+    private val remoteProvider: TrackApiRemoteProvider,
+    private val dao: HitDao
 ): DataTrackRepository {
     override suspend fun trackHit(hit: Hit) {
-        remoteProvider.trackHit(hit)
-//        println(log(hit))
+        val sendHitSuccess = sendHit(hit)
+        if (!sendHitSuccess) {
+            saveHit(hit)
+        }
+    }
+
+    suspend fun sendHit(hit: Hit): Boolean {
+        try {
+            return remoteProvider.trackHit(hit.asDtoModel())
+        } catch (e: Exception) {
+            Logger.log(e.message)
+            return false
+        }
+    }
+
+
+    suspend fun saveHit(hit: Hit) {
+        val hitDbo = hit.asDboModel()
+        dao.insertHit(hitDbo)
+        Logger.log("Hit ${hitDbo.name} inserted")
     }
 }

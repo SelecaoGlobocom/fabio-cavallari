@@ -1,6 +1,6 @@
 package com.example.datatrackapp.data.client
 
-import com.example.datatrackapp.domain.model.Hit
+import com.example.datatrackapp.data.dto.HitDto
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -8,6 +8,6 @@ import retrofit2.http.POST
 interface TrackApiClient {
     @POST("/")
     suspend fun trackHit(
-        @Body hit: Hit
+        @Body hit: HitDto
     ): Response<Unit>
 }

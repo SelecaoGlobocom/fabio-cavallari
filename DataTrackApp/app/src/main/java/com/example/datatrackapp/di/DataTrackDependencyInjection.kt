@@ -23,6 +23,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object DataTrackDependencyInjection {
+    var forceSuccess = false
+
     val databaseModules = module {
         single<DataTrackDatabase> {
             Room.databaseBuilder(

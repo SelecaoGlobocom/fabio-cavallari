@@ -4,4 +4,5 @@ import com.example.datatrackapp.domain.model.Hit
 
 interface DataTrackRepository {
     suspend fun trackHit(hit: Hit)
+    suspend fun updateHitList()
 }

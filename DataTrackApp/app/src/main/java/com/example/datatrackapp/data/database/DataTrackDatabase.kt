@@ -7,7 +7,7 @@ import com.example.datatrackapp.data.dao.HitDao
 import com.example.datatrackapp.data.dbo.HitDbo
 import com.example.datatrackapp.utils.Converters
 
-@Database(entities = [HitDbo::class], version = 2)
+@Database(entities = [HitDbo::class], version = 3)
 @TypeConverters(Converters::class)
 abstract class DataTrackDatabase : RoomDatabase() {
     abstract fun hitDao(): HitDao

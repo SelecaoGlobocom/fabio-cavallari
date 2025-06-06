@@ -8,6 +8,6 @@ import retrofit2.http.POST
 interface TrackApiClient {
     @POST("/")
     suspend fun trackHit(
-        @Body hit: HitDto
+        @Body hitList: List<HitDto>
     ): Response<Unit>
 }

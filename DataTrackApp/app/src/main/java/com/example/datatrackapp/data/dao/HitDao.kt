@@ -13,4 +13,13 @@ interface HitDao {
 
     @Query("SELECT * FROM hit ORDER BY timestamp DESC")
     suspend fun getAllHits(): List<HitDbo>
+
+    @Query("SELECT * FROM hit WHERE sent = 0 ORDER BY timestamp DESC")
+    suspend fun getUnsentHits(): List<HitDbo>
+
+    @Query("DELETE FROM hit WHERE sent = 1")
+    suspend fun deleteSentHits()
+
+    @Query("DELETE FROM hit WHERE id = :hitId")
+    suspend fun deleteHitById(hitId: Int)
 }

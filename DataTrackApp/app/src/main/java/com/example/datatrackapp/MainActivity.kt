@@ -5,17 +5,25 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.example.datatrackapp.data.dao.HitDao
+import com.example.datatrackapp.data.repository.DataTrackRepository
+import com.example.datatrackapp.di.DataTrackDependencyInjection
 import com.example.datatrackapp.presentation.navigation.DataTrackNavHost
 import com.example.datatrackapp.presentation.theme.DataTrackAppTheme
 import com.example.datatrackapp.utils.Logger
@@ -35,17 +43,42 @@ class MainActivity : ComponentActivity() {
                     Scaffold(
                         modifier = Modifier.fillMaxSize(),
                         floatingActionButton = {
-                            FloatingActionButton(
-                                onClick = {
-                                    val hitDao: HitDao = get()
-                                    coroutineScope.launch {
-                                        val hits = hitDao.getAllHits()
-                                        hits.forEach { Logger.log(it) }
+                            Column {
+                                FloatingActionButton(
+                                    onClick = {
+                                        val hitDao: HitDao = get()
+                                        coroutineScope.launch {
+                                            val hits = hitDao.getAllHits()
+                                            hits.forEach { Logger.log(it) }
+                                        }
+                                        Logger.log("show hits")
                                     }
+                                ) {
+                                    Icon(imageVector = Icons.AutoMirrored.Filled.List, contentDescription = "Show Hits")
                                 }
-                            ) {
-                                Icon(imageVector = Icons.AutoMirrored.Filled.List, contentDescription = "Show Hits")
+                                Spacer(Modifier.height(16.dp))
+                                FloatingActionButton(
+                                    onClick = {
+                                        val repository: DataTrackRepository = get()
+                                        coroutineScope.launch {
+                                            Logger.log("update hit list click")
+                                            repository.updateHitList()
+                                        }
+                                    }
+                                ) {
+                                    Icon(imageVector = Icons.Filled.Refresh, contentDescription = "Update Hits")
+                                }
+                                Spacer(Modifier.height(16.dp))
+                                FloatingActionButton(
+                                    onClick = {
+                                        DataTrackDependencyInjection.forceSuccess = !DataTrackDependencyInjection.forceSuccess
+                                        Logger.log("force success: " + DataTrackDependencyInjection.forceSuccess)
+                                    }
+                                ) {
+                                    Icon(imageVector = Icons.Filled.Send, contentDescription = "Force success")
+                                }
                             }
+
                         },
                     ) { innerPadding ->
                         Box(Modifier.padding(innerPadding)) {

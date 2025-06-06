@@ -2,12 +2,21 @@ package com.example.datatrackapp.data.remoteprovider
 
 import com.example.datatrackapp.data.client.TrackApiClient
 import com.example.datatrackapp.data.dto.HitDto
+import com.example.datatrackapp.di.DataTrackDependencyInjection
+import com.example.datatrackapp.utils.Logger
 
 class TrackApiRemoteProviderImpl(
     private val client: TrackApiClient
 ) : TrackApiRemoteProvider {
-    override suspend fun trackHit(hit: HitDto): Boolean {
-        val response = client.trackHit(hit)
+    override suspend fun trackHit(hitList: List<HitDto>): Boolean {
+        if (DataTrackDependencyInjection.forceSuccess) {
+            Logger.log("sent hit success")
+            return true
+        }
+        Logger.log("sent hit failure")
+        return false
+        //TODO - remover force success
+        val response = client.trackHit(hitList)
         return response.isSuccessful
     }
 }

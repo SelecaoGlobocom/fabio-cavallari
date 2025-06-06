@@ -22,4 +22,7 @@ interface HitDao {
 
     @Query("DELETE FROM hit WHERE id = :hitId")
     suspend fun deleteHitById(hitId: Int)
+
+    @Query("UPDATE hit SET sent = 1 WHERE id = :id")
+    suspend fun markHitAsSent(id: Int)
 }

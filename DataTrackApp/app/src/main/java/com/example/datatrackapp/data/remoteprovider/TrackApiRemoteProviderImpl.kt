@@ -11,6 +11,7 @@ class TrackApiRemoteProviderImpl(
     override suspend fun trackHit(hitList: List<HitDto>): Boolean {
         if (DataTrackDependencyInjection.forceSuccess) {
             Logger.log("sent hit success")
+            Logger.log("hit list sent: ${hitList.joinToString(separator = ";") { it.name }}")
             return true
         }
         Logger.log("sent hit failure")

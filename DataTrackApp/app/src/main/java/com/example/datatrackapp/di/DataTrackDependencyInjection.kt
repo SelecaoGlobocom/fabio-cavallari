@@ -8,6 +8,7 @@ import com.example.datatrackapp.data.repository.DataTrackRepositoryImpl
 import com.example.datatrackapp.domain.usecase.SendHitUseCase
 import com.example.datatrackapp.presentation.viewmodel.ChannelScreenViewModel
 import com.example.datatrackapp.presentation.viewmodel.HomeScreenViewModel
+import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.module.dsl.bind
@@ -22,6 +23,10 @@ object DataTrackDependencyInjection {
     val networkModules = module {
         factory<OkHttpClient> {
             OkHttpClient.Builder()
+                .dispatcher(Dispatcher().apply {
+                    maxRequests = 1
+                    maxRequestsPerHost = 1
+                })
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .addInterceptor(HttpLoggingInterceptor().apply {
@@ -32,7 +37,7 @@ object DataTrackDependencyInjection {
         factory<TrackApiClient> {
             Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://10.0.2.2:8080/")
+                .baseUrl("http://10.0.2.2:5000/")
                 .client(get())
                 .build()
                 .create(TrackApiClient::class.java)

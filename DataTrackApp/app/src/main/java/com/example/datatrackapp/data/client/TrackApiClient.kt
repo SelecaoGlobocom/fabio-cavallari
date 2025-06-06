@@ -7,7 +7,7 @@ import retrofit2.http.POST
 
 interface TrackApiClient {
     @POST("/")
-    fun trackHit(
+    suspend fun trackHit(
         @Body hit: Hit
     ): Response<Unit>
 }

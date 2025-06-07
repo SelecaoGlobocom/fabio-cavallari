@@ -76,9 +76,12 @@ dependencies {
     implementation(libs.logging.interceptor)
     //koin
     implementation(libs.koin.androidx.compose)
+    implementation(libs.koin.androidx.workmanager)
     //room
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
     testImplementation(libs.androidx.room.testing)
+    //work manager
+    implementation(libs.androidx.work.runtime.ktx)
 }

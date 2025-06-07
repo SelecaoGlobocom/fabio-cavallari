@@ -1,21 +1,25 @@
 package com.example.datatrackapp.di
 
 import androidx.room.Room
+import androidx.work.WorkManager
+import com.example.datatrackapp.DataTrackerWorker
 import com.example.datatrackapp.data.client.TrackApiClient
-import com.example.datatrackapp.data.dao.HitDao
 import com.example.datatrackapp.data.database.DataTrackDatabase
 import com.example.datatrackapp.data.remoteprovider.TrackApiRemoteProvider
 import com.example.datatrackapp.data.remoteprovider.TrackApiRemoteProviderImpl
 import com.example.datatrackapp.data.repository.DataTrackRepository
 import com.example.datatrackapp.data.repository.DataTrackRepositoryImpl
-import com.example.datatrackapp.domain.usecase.TrackHitUseCase
+import com.example.datatrackapp.domain.usecase.SaveHitUseCase
+import com.example.datatrackapp.domain.usecase.SendBatchHitsUseCase
 import com.example.datatrackapp.presentation.viewmodel.ChannelScreenViewModel
 import com.example.datatrackapp.presentation.viewmodel.HomeScreenViewModel
 import okhttp3.Dispatcher
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.androidx.workmanager.dsl.workerOf
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.factoryOf
+import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -24,6 +28,11 @@ import java.util.concurrent.TimeUnit
 
 object DataTrackDependencyInjection {
     var forceSuccess = false
+
+    val workerModules = module {
+        single { WorkManager.getInstance(get()) }
+        workerOf(::DataTrackerWorker)
+    }
 
     val databaseModules = module {
         single<DataTrackDatabase> {
@@ -35,7 +44,7 @@ object DataTrackDependencyInjection {
                 .fallbackToDestructiveMigration(true)
                 .build()
         }
-        single<HitDao> { get<DataTrackDatabase>().hitDao() }
+        singleOf(DataTrackDatabase::hitDao)
     }
 
     val networkModules = module {
@@ -67,7 +76,8 @@ object DataTrackDependencyInjection {
 
         factoryOf(::DataTrackRepositoryImpl) { bind<DataTrackRepository>() }
 
-        factoryOf(::TrackHitUseCase) { bind<TrackHitUseCase>() }
+        factoryOf(::SaveHitUseCase) { bind<SaveHitUseCase>() }
+        factoryOf(::SendBatchHitsUseCase) { bind<SendBatchHitsUseCase>() }
 
         viewModelOf(::HomeScreenViewModel)
         viewModelOf(::ChannelScreenViewModel)

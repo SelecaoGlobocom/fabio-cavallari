@@ -7,11 +7,11 @@ import com.example.datatrackapp.domain.model.HOME_BUTTON_EVENT_CLICK_NAME
 import com.example.datatrackapp.domain.model.HOME_SCREEN_NAME
 import com.example.datatrackapp.domain.model.Hit
 import com.example.datatrackapp.domain.model.HitType
-import com.example.datatrackapp.domain.usecase.SaveHitUseCase
+import com.example.datatrackapp.domain.usecase.TrackHitsUseCase
 import kotlinx.coroutines.launch
 
 class HomeScreenViewModel(
-    private val saveHitUseCase: SaveHitUseCase,
+    private val trackHitsUseCase: TrackHitsUseCase,
 ): ViewModel() {
     fun trackButtonClick(channel: String) {
         viewModelScope.launch {
@@ -20,7 +20,7 @@ class HomeScreenViewModel(
                 name = HOME_BUTTON_EVENT_CLICK_NAME,
                 data = mapOf(CHANNEL_KEY to channel),
             )
-            saveHitUseCase(eventHit)
+            trackHitsUseCase(eventHit)
         }
     }
 
@@ -30,7 +30,7 @@ class HomeScreenViewModel(
                 type = HitType.PAGE_VIEW,
                 name = HOME_SCREEN_NAME,
             )
-            saveHitUseCase(eventHit)
+            trackHitsUseCase(eventHit)
         }
     }
 }

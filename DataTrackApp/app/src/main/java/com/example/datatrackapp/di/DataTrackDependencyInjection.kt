@@ -11,6 +11,7 @@ import com.example.datatrackapp.data.repository.DataTrackRepository
 import com.example.datatrackapp.data.repository.DataTrackRepositoryImpl
 import com.example.datatrackapp.domain.usecase.SaveHitUseCase
 import com.example.datatrackapp.domain.usecase.SendBatchHitsUseCase
+import com.example.datatrackapp.domain.usecase.TrackHitsUseCase
 import com.example.datatrackapp.presentation.viewmodel.ChannelScreenViewModel
 import com.example.datatrackapp.presentation.viewmodel.HomeScreenViewModel
 import okhttp3.Dispatcher
@@ -72,10 +73,11 @@ object DataTrackDependencyInjection {
     }
 
     val appModules = module {
-        factoryOf(::TrackApiRemoteProviderImpl) { bind<TrackApiRemoteProvider>() }
+        singleOf(::TrackApiRemoteProviderImpl) { bind<TrackApiRemoteProvider>() }
 
-        factoryOf(::DataTrackRepositoryImpl) { bind<DataTrackRepository>() }
+        singleOf(::DataTrackRepositoryImpl) { bind<DataTrackRepository>() }
 
+        factoryOf(::TrackHitsUseCase) { bind<TrackHitsUseCase>() }
         factoryOf(::SaveHitUseCase) { bind<SaveHitUseCase>() }
         factoryOf(::SendBatchHitsUseCase) { bind<SendBatchHitsUseCase>() }
 

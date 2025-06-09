@@ -20,6 +20,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("int", "HIT_BATCH_THRESHOLD", "10")
+        buildConfigField("boolean", "WORK_MANAGER_ENABLED", "false")
     }
 
     buildTypes {

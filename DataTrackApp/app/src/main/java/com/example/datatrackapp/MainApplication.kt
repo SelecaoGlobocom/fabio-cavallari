@@ -1,8 +1,8 @@
 package com.example.datatrackapp
 
 import android.app.Application
-import com.example.datatrackapp.di.DataTrackDependencyInjection
-import com.example.datatrackapp.utils.WorkManagerHelper
+import com.example.datatrackapp.plataform.di.DataTrackDependencyInjection
+import com.example.datatrackapp.plataform.workmanager.WorkManagerHelper
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.workmanager.koin.workManagerFactory

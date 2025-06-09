@@ -1,10 +1,10 @@
-package com.example.datatrackapp
+package com.example.datatrackapp.plataform.workmanager
 
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.example.datatrackapp.domain.usecase.SendBatchHitsUseCase
-import com.example.datatrackapp.utils.Logger
+import com.example.datatrackapp.plataform.utils.Logger
 
 class DataTrackerWorker(
     appContext: Context,
@@ -23,4 +23,3 @@ class DataTrackerWorker(
         }
     }
 }
-

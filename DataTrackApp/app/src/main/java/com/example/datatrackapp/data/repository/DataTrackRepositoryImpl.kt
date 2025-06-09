@@ -6,7 +6,7 @@ import com.example.datatrackapp.data.mapper.asDomainModel
 import com.example.datatrackapp.data.mapper.asDtoModel
 import com.example.datatrackapp.data.remoteprovider.TrackApiRemoteProvider
 import com.example.datatrackapp.domain.model.Hit
-import com.example.datatrackapp.utils.Logger
+import com.example.datatrackapp.plataform.utils.Logger
 
 class DataTrackRepositoryImpl(
     private val remoteProvider: TrackApiRemoteProvider,

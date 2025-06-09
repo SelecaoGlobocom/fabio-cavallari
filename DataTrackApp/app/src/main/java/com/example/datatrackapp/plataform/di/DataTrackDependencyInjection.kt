@@ -1,8 +1,8 @@
-package com.example.datatrackapp.di
+package com.example.datatrackapp.plataform.di
 
 import androidx.room.Room
 import androidx.work.WorkManager
-import com.example.datatrackapp.DataTrackerWorker
+import com.example.datatrackapp.plataform.workmanager.DataTrackerWorker
 import com.example.datatrackapp.data.client.TrackApiClient
 import com.example.datatrackapp.data.database.DataTrackDatabase
 import com.example.datatrackapp.data.remoteprovider.TrackApiRemoteProvider

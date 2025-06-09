@@ -1,4 +1,4 @@
-package com.example.datatrackapp
+package com.example.datatrackapp.presentation.activity
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -21,10 +21,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.example.datatrackapp.data.dao.HitDao
-import com.example.datatrackapp.di.DataTrackDependencyInjection
+import com.example.datatrackapp.plataform.di.DataTrackDependencyInjection
+import com.example.datatrackapp.plataform.utils.Logger
 import com.example.datatrackapp.presentation.navigation.DataTrackNavHost
 import com.example.datatrackapp.presentation.theme.DataTrackAppTheme
-import com.example.datatrackapp.utils.Logger
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 import org.koin.androidx.compose.KoinAndroidContext
@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
             DataTrackAppTheme {
                 KoinAndroidContext {
                     Scaffold(
-                        modifier = Modifier.fillMaxSize(),
+                        modifier = Modifier.Companion.fillMaxSize(),
                         floatingActionButton = {
                             Column {
                                 FloatingActionButton(
@@ -52,22 +52,29 @@ class MainActivity : ComponentActivity() {
                                         Logger.log("show hits")
                                     }
                                 ) {
-                                    Icon(imageVector = Icons.AutoMirrored.Filled.List, contentDescription = "Show Hits")
+                                    Icon(
+                                        imageVector = Icons.AutoMirrored.Filled.List,
+                                        contentDescription = "Show Hits"
+                                    )
                                 }
-                                Spacer(Modifier.height(16.dp))
+                                Spacer(Modifier.Companion.height(16.dp))
                                 FloatingActionButton(
                                     onClick = {
-                                        DataTrackDependencyInjection.forceSuccess = !DataTrackDependencyInjection.forceSuccess
+                                        DataTrackDependencyInjection.forceSuccess =
+                                            !DataTrackDependencyInjection.forceSuccess
                                         Logger.log("force success: " + DataTrackDependencyInjection.forceSuccess)
                                     }
                                 ) {
-                                    Icon(imageVector = Icons.Filled.Send, contentDescription = "Force success")
+                                    Icon(
+                                        imageVector = Icons.Filled.Send,
+                                        contentDescription = "Force success"
+                                    )
                                 }
                             }
 
                         },
                     ) { innerPadding ->
-                        Box(Modifier.padding(innerPadding)) {
+                        Box(Modifier.Companion.padding(innerPadding)) {
                             DataTrackNavHost(navHostController)
                         }
                     }

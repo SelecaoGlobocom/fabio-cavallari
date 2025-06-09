@@ -1,4 +1,4 @@
-package com.example.datatrackapp.utils
+package com.example.datatrackapp.plataform.utils
 
 import android.util.Log
 import com.google.gson.GsonBuilder

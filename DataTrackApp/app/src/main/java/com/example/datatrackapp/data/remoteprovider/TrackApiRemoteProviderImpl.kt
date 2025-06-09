@@ -2,8 +2,8 @@ package com.example.datatrackapp.data.remoteprovider
 
 import com.example.datatrackapp.data.client.TrackApiClient
 import com.example.datatrackapp.data.dto.HitDto
-import com.example.datatrackapp.di.DataTrackDependencyInjection
-import com.example.datatrackapp.utils.Logger
+import com.example.datatrackapp.plataform.di.DataTrackDependencyInjection
+import com.example.datatrackapp.plataform.utils.Logger
 
 class TrackApiRemoteProviderImpl(
     private val client: TrackApiClient

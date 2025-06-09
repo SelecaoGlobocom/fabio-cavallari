@@ -1,4 +1,4 @@
-package com.example.datatrackapp.utils
+package com.example.datatrackapp.data.database
 
 import androidx.room.TypeConverter
 import com.example.datatrackapp.domain.model.HitType

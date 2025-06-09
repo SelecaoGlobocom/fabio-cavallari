@@ -5,6 +5,7 @@ import com.example.datatrackapp.data.mapper.asDboModel
 import com.example.datatrackapp.data.mapper.asDomainModel
 import com.example.datatrackapp.data.mapper.asDtoModel
 import com.example.datatrackapp.data.remoteprovider.TrackApiRemoteProvider
+import com.example.datatrackapp.data.utils.Result
 import com.example.datatrackapp.domain.model.Hit
 import com.example.datatrackapp.plataform.utils.Logger
 
@@ -22,15 +23,11 @@ class DataTrackRepositoryImpl(
     }
 
     override suspend fun sendPendingHits(hitList: List<Hit>) {
-        try {
-            val success = remoteProvider.trackHit(hitList.asDtoModel())
-            if (success) {
-                hitList.forEach { hit ->
-                    hit.id?.let { dao.markHitAsSent(it) }
-                }
+        val result = remoteProvider.trackHit(hitList.asDtoModel())
+        if (result is Result.Success) {
+            hitList.forEach { hit ->
+                hit.id?.let { dao.markHitAsSent(it) }
             }
-        } catch (e: Exception) {
-            Logger.log(e.message)
         }
     }
 }

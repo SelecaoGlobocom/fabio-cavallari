@@ -77,9 +77,9 @@ object DataTrackDependencyInjection {
 
         singleOf(::DataTrackRepositoryImpl) { bind<DataTrackRepository>() }
 
-        factoryOf(::TrackHitsUseCase) { bind<TrackHitsUseCase>() }
         factoryOf(::SaveHitUseCase) { bind<SaveHitUseCase>() }
         factory<SendBatchHitsUseCase> { SendBatchHitsUseCase(BuildConfig.HIT_BATCH_THRESHOLD, get()) }
+        factory<TrackHitsUseCase> { TrackHitsUseCase(BuildConfig.WORK_MANAGER_ENABLED, get(), get()) }
 
         viewModelOf(::HomeScreenViewModel)
         viewModelOf(::ChannelScreenViewModel)

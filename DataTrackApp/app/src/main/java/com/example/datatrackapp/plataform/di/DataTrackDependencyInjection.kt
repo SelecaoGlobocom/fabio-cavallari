@@ -2,6 +2,7 @@ package com.example.datatrackapp.plataform.di
 
 import androidx.room.Room
 import androidx.work.WorkManager
+import com.example.datatrackapp.BuildConfig
 import com.example.datatrackapp.data.client.TrackApiClient
 import com.example.datatrackapp.data.database.DataTrackDatabase
 import com.example.datatrackapp.data.remoteprovider.TrackApiRemoteProvider
@@ -78,7 +79,7 @@ object DataTrackDependencyInjection {
 
         factoryOf(::TrackHitsUseCase) { bind<TrackHitsUseCase>() }
         factoryOf(::SaveHitUseCase) { bind<SaveHitUseCase>() }
-        factoryOf(::SendBatchHitsUseCase) { bind<SendBatchHitsUseCase>() }
+        factory<SendBatchHitsUseCase> { SendBatchHitsUseCase(BuildConfig.HIT_BATCH_THRESHOLD, get()) }
 
         viewModelOf(::HomeScreenViewModel)
         viewModelOf(::ChannelScreenViewModel)

@@ -29,9 +29,9 @@ import org.junit.Test
 
 class DataTrackRepositoryImplTest {
 
-    private lateinit var remoteProvider: TrackApiRemoteProvider
-    private lateinit var dao: HitDao
-    private lateinit var repository: DataTrackRepositoryImpl
+    private val remoteProvider = mockk<TrackApiRemoteProvider>()
+    private val dao = mockk<HitDao>(relaxUnitFun = true)
+    private val repository = DataTrackRepositoryImpl(remoteProvider, dao)
 
     private val fakeHit1 = Hit(
         id = 1,
@@ -80,10 +80,6 @@ class DataTrackRepositoryImplTest {
 
     @Before
     fun setUp() {
-        remoteProvider = mockk()
-        dao =
-            mockk(relaxUnitFun = true)
-        repository = DataTrackRepositoryImpl(remoteProvider, dao)
         mockkObject(Logger)
         every { Logger.log(any()) } just Runs
     }

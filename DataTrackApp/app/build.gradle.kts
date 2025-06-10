@@ -71,6 +71,7 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     //coroutines
     implementation(libs.kotlinx.coroutines.android)
+    testImplementation(libs.kotlinx.coroutines.test) // Verifique a última versão
     //network
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
@@ -85,4 +86,8 @@ dependencies {
     testImplementation(libs.androidx.room.testing)
     //work manager
     implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    //mockk
+    testImplementation(libs.mockk)
+
 }

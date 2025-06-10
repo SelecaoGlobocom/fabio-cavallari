@@ -2,7 +2,6 @@ package com.example.datatrackapp.plataform.di
 
 import androidx.room.Room
 import androidx.work.WorkManager
-import com.example.datatrackapp.plataform.workmanager.DataTrackerWorker
 import com.example.datatrackapp.data.client.TrackApiClient
 import com.example.datatrackapp.data.database.DataTrackDatabase
 import com.example.datatrackapp.data.remoteprovider.TrackApiRemoteProvider
@@ -12,6 +11,7 @@ import com.example.datatrackapp.data.repository.DataTrackRepositoryImpl
 import com.example.datatrackapp.domain.usecase.SaveHitUseCase
 import com.example.datatrackapp.domain.usecase.SendBatchHitsUseCase
 import com.example.datatrackapp.domain.usecase.TrackHitsUseCase
+import com.example.datatrackapp.plataform.workmanager.DataTrackerWorker
 import com.example.datatrackapp.presentation.viewmodel.ChannelScreenViewModel
 import com.example.datatrackapp.presentation.viewmodel.HomeScreenViewModel
 import okhttp3.Dispatcher
@@ -28,7 +28,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object DataTrackDependencyInjection {
-    var forceSuccess = false
 
     val workerModules = module {
         single { WorkManager.getInstance(get()) }

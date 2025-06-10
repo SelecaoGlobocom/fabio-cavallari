@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.List
-import androidx.compose.material.icons.filled.Send
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -21,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import com.example.datatrackapp.data.dao.HitDao
-import com.example.datatrackapp.plataform.di.DataTrackDependencyInjection
 import com.example.datatrackapp.plataform.utils.Logger
 import com.example.datatrackapp.presentation.navigation.DataTrackNavHost
 import com.example.datatrackapp.presentation.theme.DataTrackAppTheme
@@ -58,18 +56,6 @@ class MainActivity : ComponentActivity() {
                                     )
                                 }
                                 Spacer(Modifier.Companion.height(16.dp))
-                                FloatingActionButton(
-                                    onClick = {
-                                        DataTrackDependencyInjection.forceSuccess =
-                                            !DataTrackDependencyInjection.forceSuccess
-                                        Logger.log("force success: " + DataTrackDependencyInjection.forceSuccess)
-                                    }
-                                ) {
-                                    Icon(
-                                        imageVector = Icons.Filled.Send,
-                                        contentDescription = "Force success"
-                                    )
-                                }
                             }
 
                         },

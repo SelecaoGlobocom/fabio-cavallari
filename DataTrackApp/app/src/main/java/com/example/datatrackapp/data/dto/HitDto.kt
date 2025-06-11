@@ -1,6 +1,5 @@
 package com.example.datatrackapp.data.dto
 
-import com.example.datatrackapp.domain.model.Hit
 import com.example.datatrackapp.domain.model.HitType
 
 data class HitDto(
@@ -8,11 +7,4 @@ data class HitDto(
     val name: String,
     val data: Map<String, String> = mapOf(),
     val timestamp: Long = System.currentTimeMillis(),
-)
-
-fun Hit.asDtoModel(): HitDto = HitDto(
-    type = type,
-    name = name,
-    data = data,
-    timestamp = timestamp
 )

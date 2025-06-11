@@ -43,6 +43,12 @@ android {
         compose = true
         buildConfig = true
     }
+    packaging {
+        resources {
+            excludes += "META-INF/LICENSE.md"
+            excludes += "META-INF/LICENSE-notice.md"
+        }
+    }
 }
 
 dependencies {
@@ -55,6 +61,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.junit.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -71,7 +78,7 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     //coroutines
     implementation(libs.kotlinx.coroutines.android)
-    testImplementation(libs.kotlinx.coroutines.test) // Verifique a última versão
+    testImplementation(libs.kotlinx.coroutines.test)
     //network
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
@@ -89,5 +96,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     //mockk
     testImplementation(libs.mockk)
+    androidTestImplementation(libs.mockk.android)
 
 }

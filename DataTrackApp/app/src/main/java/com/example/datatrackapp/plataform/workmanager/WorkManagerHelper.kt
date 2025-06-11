@@ -5,7 +5,6 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.datatrackapp.BuildConfig
-import com.example.datatrackapp.plataform.workmanager.DataTrackerWorker
 import org.koin.core.component.KoinComponent
 import java.util.concurrent.TimeUnit
 
@@ -15,7 +14,7 @@ object WorkManagerHelper: KoinComponent {
             return
         }
         val workRequest = PeriodicWorkRequestBuilder<DataTrackerWorker>(
-            30, TimeUnit.SECONDS
+            10, TimeUnit.MINUTES
         ).build()
 
         WorkManager.Companion.getInstance(context).apply {

@@ -13,9 +13,8 @@ class DataTrackerWorker(
 ) : CoroutineWorker(appContext, params) {
 
     override suspend fun doWork(): Result {
-        Logger.log("doing work")
         return try {
-            sendBatchHitsUseCase()
+            sendBatchHitsUseCase(workManagerCall = true)
             Result.success()
         } catch (e: Exception) {
             Logger.log("work error: " + e.message.toString())
